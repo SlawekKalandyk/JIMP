@@ -39,7 +39,7 @@ int main(void)
 	int kulki[9] = {0};
 	kulki[losowanieNr] = 1;
 
-	najciezsza = waga(kulki, waga(kulki, 0, 3), 1);
+	najciezsza = waga(kulki, waga(kulki, 0, 3), 1); //dwa "ważenia" - jedno na podstawie danych z drugiego
 	printf("Najcięższa kulka ma nr %d\n", najciezsza);
 
 	printf("Sprawdzenie:\n");

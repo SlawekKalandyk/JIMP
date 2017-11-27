@@ -1,0 +1,15 @@
+Zajecia3:
+zaj3zad1.c - program wylicza obwody i pola figur: kwadratu, prostokąta, trójkąta i koła
+zaj3zad2.c - program dokonuje konwersji ze stopni Celsjusza na Fahrenheita lub na odwrót
+zaj3zad3.c - program dokonuje konwersji miary kąta ze stopni na radiany i na odwrót
+
+Zajecia4:
+zaj4zad1.c - program liczy pierwiastki równania kwadratowego, użytkownik ma za zadanie podać współczynniki tego równania
+zaj4zad2.c - program wczytuje liczbę od 1 do 10 włącznie i bazując tylko na operatorach relacji "zgaduje" ją
+zaj4zad2rek.c - program podobny do powyższego, z tym że korzysta z rekurencji; jego działanie jest dokładnie takie samo jako zaj4zad2.c, lecz pokazuje max. 4 kroki zamiast 3, tylko do wglądu
+zaj4zad3.c - program jest implementacją zagadki z wagą i kulkami - w dwóch "ważeniach" wyznacza, która z 9 kul jest najcięższa
+
+Zajecia5:
+zaj5zad1.c - program porównuje dwie godziny i pokazuje, która jest "większa" (czyt. występuje później w 24 godzinnym formacie)
+zaj5zad2.c - program oblicza wyznacznik macierzy 3x3
+zaj5zad3.c - program mnoży dwie macierze 2x2 za pomocą funkcji, która jako argument przyjmuje tablicę 2x2x2 
