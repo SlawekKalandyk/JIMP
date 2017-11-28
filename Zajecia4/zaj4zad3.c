@@ -14,21 +14,20 @@ int suma(int kulki[], int poczatek, int ilosc)
 	for(int i = poczatek; i < poczatek + ilosc; i++)
 		grupa += kulki[i];
 
-	return grupa;
-	
+	return grupa;	
 }
 
 int waga(int kulki[], int poczatek, int ilosc)
 {
 	int grupa1 = suma(kulki, poczatek, ilosc);
 	int grupa2 = suma(kulki, poczatek + ilosc, ilosc);
+
 	if(grupa1 > grupa2)
 		return poczatek;
 	else if(grupa1 < grupa2)
 		return poczatek + ilosc;
 	else
 		return poczatek + 2 * ilosc;
-	
 }
 
 int main(void)
