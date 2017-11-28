@@ -26,7 +26,6 @@ int main(void)
 	{
 		printf("Liczba którą podałeś leży poza dozwolonym przedziałem.\nZostanie wylosowana liczba z przedziału [1,10]\n");
 		podanaLiczba = losowanie();
-			
 	}
 	if(podanaLiczba > 5)
 	{

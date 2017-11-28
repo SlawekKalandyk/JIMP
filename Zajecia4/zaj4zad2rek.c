@@ -48,7 +48,6 @@ int main(void)
 	{
 		printf("Podałeś liczbę z poza zakresu.\nZostanie wylosowana liczba z przedziału [1,10]\n");
 		podanaLiczba = losowanie();
-		
 	}
 	szukanie(podanaLiczba, licznikKrokow, poczatek - 1, koniec);
 

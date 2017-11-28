@@ -11,6 +11,7 @@
 int suma(int kulki[], int poczatek, int ilosc)
 {
 	int grupa = 0;
+
 	for(int i = poczatek; i < poczatek + ilosc; i++)
 		grupa += kulki[i];
 
