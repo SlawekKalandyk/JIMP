@@ -1,5 +1,5 @@
 //Sławomir Kalandyk
-//Program musi zostać skompilowany z flagą -lm, np. gcc zaj1zad4.c -lm -Wall -Wextra -pedantic
+//Program musi zostać skompilowany z flagą -lm, np. gcc zaj4zad1.c -lm -Wall -Wextra -pedantic
 
 #include <stdio.h>
 #include <math.h>
@@ -23,16 +23,24 @@ int main(void)
 {
 	double wspolczynnik1, wspolczynnik2, wspolczynnik3;
 	printf("Wprowadź wspolczynniki równania kwadratowego:\n");
-	scanf("%lf %lf %lf", &wspolczynnik1, &wspolczynnik2, &wspolczynnik3);
+
+	do
+	{
+		scanf("%lf %lf %lf", &wspolczynnik1, &wspolczynnik2, &wspolczynnik3);
+
+		if(wspolczynnik1 == 0)
+			printf("Podane równanie nie jest równaniem kwadratowym, współczynnik a musi być różny od 0.\nWprowadź współczynniki ponownie:\n");
+	} while(wspolczynnik1 == 0);
+
 	double delta = liczDelte(wspolczynnik1, wspolczynnik2, wspolczynnik3);
 
 	if(delta > 0)
-		printf("Delta większa od 0, rozwiązaniami równania są %lf i %lf\n",
-		 pierwiastek1(wspolczynnik1, wspolczynnik2, delta), pierwiastek2(wspolczynnik1, wspolczynnik2, delta));
+		printf("Delta większa od 0, rozwiązaniami równania kwadratowego są %lf i %lf\n",
+			pierwiastek1(wspolczynnik1, wspolczynnik2, delta), pierwiastek2(wspolczynnik1, wspolczynnik2, delta));
 	else if(delta == 0)
-		printf("Delta równa 0, rozwiązaniem jest %lf\n", pierwiastek1(wspolczynnik1, wspolczynnik2, delta));
+		printf("Delta równa 0, rozwiązaniem równania kwadratowego jest %lf\n", pierwiastek1(wspolczynnik1, wspolczynnik2, delta));
 	else
-		printf("Delta mniejsza od 0, brak rozwiązań równania\n");
+		printf("Delta mniejsza od 0, brak rozwiązań równania kwadratowego\n");
 
 	return 0;
 }
