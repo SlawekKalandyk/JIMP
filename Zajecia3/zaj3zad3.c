@@ -3,17 +3,8 @@
 #include <stdio.h>
 #include <math.h>
 
-double deeToRad(double dee)
-{
-	double rad = (dee * M_PI) / 180;
-	return rad;
-}
-
-double radToDee(double rad)
-{
-	double dee = rad * (180 / M_PI);
-	return dee;
-}
+double deeToRad(double dee);
+double radToDee(double rad);
 
 int main(void)
 {
@@ -36,4 +27,16 @@ int main(void)
 	}
 
 	return 0;
+}
+
+double deeToRad(double dee)
+{
+	double rad = (dee * M_PI) / 180;
+	return rad;
+}
+
+double radToDee(double rad)
+{
+	double dee = rad * (180 / M_PI);
+	return dee;
 }

@@ -4,6 +4,26 @@
 #include <stdlib.h>
 #include <time.h>
 
+int losowanie();
+void elementyMacierzy(int macierz[2][2]);
+void dwadNa3d(int macierz3d[2][2][2], int macierz2d1[2][2], int macierz2d2[2][2]);
+void mnozenieMacierzy(int macierz[2][2][2]);
+
+int main(void)
+{
+	srand(time(NULL));
+	int macierz3d[2][2][2] = {0};
+	int macierz2d1[2][2] = {0};
+	int macierz2d2[2][2] = {0};
+
+	elementyMacierzy(macierz2d1);
+	elementyMacierzy(macierz2d2);
+	dwadNa3d(macierz3d, macierz2d1, macierz2d2);
+	mnozenieMacierzy(macierz3d);
+
+	return 0;
+}
+
 int losowanie()
 {
 	int tmp = rand() % 201 - 100;
@@ -30,6 +50,7 @@ void dwadNa3d(int macierz3d[2][2][2], int macierz2d1[2][2], int macierz2d2[2][2]
 		}
 	}
 }
+
 void mnozenieMacierzy(int macierz[2][2][2])
 {
 	int wynikMnozenia[2][2] = {0};
@@ -50,17 +71,3 @@ void mnozenieMacierzy(int macierz[2][2][2])
 	
 }
 
-int main(void)
-{
-	srand(time(NULL));
-	int macierz3d[2][2][2] = {0};
-	int macierz2d1[2][2] = {0};
-	int macierz2d2[2][2] = {0};
-
-	elementyMacierzy(macierz2d1);
-	elementyMacierzy(macierz2d2);
-	dwadNa3d(macierz3d, macierz2d1, macierz2d2);
-	mnozenieMacierzy(macierz3d);
-
-	return 0;
-}

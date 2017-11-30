@@ -2,17 +2,8 @@
 
 #include <stdio.h>
 
-double celsToFahr(double cels)
-{
-	double fahr = 32 + (9 * cels) / 5;
-	return fahr;
-}
-
-double fahrToCels(double fahr)
-{
-	double cels = (5 * (fahr - 32)) / 9;
-	return cels;
-}
+double celsToFahr(double cels);
+double fahrToCels(double fahr);
 
 int main(void)
 {
@@ -35,4 +26,16 @@ int main(void)
 	}
 
 	return 0;
+}
+
+double celsToFahr(double cels)
+{
+	double fahr = 32 + (9 * cels) / 5;
+	return fahr;
+}
+
+double fahrToCels(double fahr)
+{
+	double cels = (5 * (fahr - 32)) / 9;
+	return cels;
 }

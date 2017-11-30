@@ -4,20 +4,9 @@
 #include <stdio.h>
 #include <math.h>
 
-double liczDelte(double a, double b, double c)
-{
-	return b * b - 4 * a * c;
-}
-
-double pierwiastek1(double a, double b, double delta)
-{
-	return (-b + sqrt(delta)) / (2 * a);
-}
-
-double pierwiastek2(double a, double b, double delta)
-{
-	return (-b - sqrt(delta)) / (2 * a);
-}
+double liczDelte(double a, double b, double c);
+double pierwiastek1(double a, double b, double delta);
+double pierwiastek2(double a, double b, double delta);
 
 int main(void)
 {
@@ -43,4 +32,19 @@ int main(void)
 		printf("Delta mniejsza od 0, brak rozwiązań równania kwadratowego\n");
 
 	return 0;
+}
+
+double liczDelte(double a, double b, double c)
+{
+	return b * b - 4 * a * c;
+}
+
+double pierwiastek1(double a, double b, double delta)
+{
+	return (-b + sqrt(delta)) / (2 * a);
+}
+
+double pierwiastek2(double a, double b, double delta)
+{
+	return (-b - sqrt(delta)) / (2 * a);
 }

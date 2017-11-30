@@ -4,16 +4,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-void printLiczba(int liczba)
-{
-	printf("Podana liczba to %d\n", liczba);
-}
-
-int losowanie()
-{
-	int tmp = rand() % 10 + 1;
-	return tmp;
-}
+void printLiczba(int liczba);
+int losowanie();
 
 int main(void)
 {
@@ -64,4 +56,15 @@ int main(void)
 		printLiczba(5);
 
 	return 0;
+}
+
+void printLiczba(int liczba)
+{
+	printf("Podana liczba to %d\n", liczba);
+}
+
+int losowanie()
+{
+	int tmp = rand() % 10 + 1;
+	return tmp;
 }

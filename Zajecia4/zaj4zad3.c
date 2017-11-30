@@ -8,6 +8,27 @@
 #include <stdlib.h>
 #include <time.h>
 
+int suma(int kulki[], int poczatek, int ilosc);
+int waga(int kulki[], int poczatek, int ilosc);
+
+int main(void)
+{	
+	srand(time(NULL));	
+	int najciezsza;
+	int losowanieNr = rand() % 9;
+	int kulki[9] = {0};
+	kulki[losowanieNr] = 1;
+
+	najciezsza = waga(kulki, waga(kulki, 0, 3), 1); //dwa "ważenia" - jedno na podstawie danych z drugiego
+	printf("Najcięższa kulka ma nr %d\n", najciezsza);
+
+	printf("Sprawdzenie:\n");
+	for(int j = 0; j < 9; j++)
+		printf("kulki[%d] = %d\n", j, kulki[j]);
+
+	return 0;
+}
+
 int suma(int kulki[], int poczatek, int ilosc)
 {
 	int grupa = 0;
@@ -29,22 +50,4 @@ int waga(int kulki[], int poczatek, int ilosc)
 		return poczatek + ilosc;
 	else
 		return poczatek + 2 * ilosc;
-}
-
-int main(void)
-{	
-	srand(time(NULL));	
-	int najciezsza;
-	int losowanieNr = rand() % 9;
-	int kulki[9] = {0};
-	kulki[losowanieNr] = 1;
-
-	najciezsza = waga(kulki, waga(kulki, 0, 3), 1); //dwa "ważenia" - jedno na podstawie danych z drugiego
-	printf("Najcięższa kulka ma nr %d\n", najciezsza);
-
-	printf("Sprawdzenie:\n");
-	for(int j = 0; j < 9; j++)
-		printf("kulki[%d] = %d\n", j, kulki[j]);
-
-	return 0;
 }
