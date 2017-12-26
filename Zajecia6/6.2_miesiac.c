@@ -30,8 +30,11 @@ int main(void)
     else
         liczbaDni = 31;
 
-    for(int i = 0; i < dniPoprzedniMiesiac; i++) // x z poprzedniego miesiąca
-        printf("x ");
+    if(dniPoprzedniMiesiac % 7 != 0) // x z poprzedniego miesiąca
+    {
+        for(int i = 0; i < dniPoprzedniMiesiac; i++)
+            printf("x ");
+    }
 
     for(int i = 1 + dniPoprzedniMiesiac; i <= liczbaDni + dniPoprzedniMiesiac; i++) // dni 1 - 28/29/30/31
     {
