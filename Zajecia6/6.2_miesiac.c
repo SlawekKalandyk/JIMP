@@ -1,6 +1,6 @@
 //Sławomir Kalandyk
 //Nie jestem pewny czy dobrze zinterpretowałem zadanie, moje rozwiązanie pokazuje
-//aktualny miesiąc w formacie pon wt śr czw pią sob nie w każdej linijce,
+//aktualny miesiąc w formacie !!! pon wt śr czw pią sob nie !!! w każdej linijce,
 //gdzie x oznacza dni z przeszłego lub kolejnego miesiąca.
 #include <stdio.h>
 #include <stdlib.h>
@@ -18,7 +18,7 @@ int main(void)
     int dzienTygodnia = strukt.tm_wday; // od 0 do 6 niedziela 0, sobota 6
     int dzienMiesiaca = strukt.tm_mday; // od 1 do 31
     int liczbaDni = 0;
-    int dniPoprzedniMiesiac = 7 + dzienTygodnia - (dzienMiesiaca % 7 - 1) - 1;
+    int dniPoprzedniMiesiac = (7 + dzienTygodnia - (dzienMiesiaca % 7 - 1) - 1) % 7;
 
     if(miesiac == 2)
         if((rok % 4 == 0 && rok % 100 != 0) || rok % 400 == 0)
@@ -30,7 +30,7 @@ int main(void)
     else
         liczbaDni = 31;
 
-    if(dniPoprzedniMiesiac % 7 != 0) // x z poprzedniego miesiąca
+    if(dniPoprzedniMiesiac != 0) // x z poprzedniego miesiąca
     {
         for(int i = 0; i < dniPoprzedniMiesiac; i++)
             printf("x ");
@@ -45,7 +45,7 @@ int main(void)
 
     if((liczbaDni + dniPoprzedniMiesiac) % 7 != 0) // x z kolejnego miesiąca
     {
-        for(int i = 0; i < (7 - liczbaDni % 7); i++)
+        for(int i = 0; i < (7 - liczbaDni % 7 - dniPoprzedniMiesiac); i++)
             printf("x ");
         printf("\n");
     }
