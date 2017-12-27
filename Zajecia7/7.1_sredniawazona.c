@@ -1,3 +1,5 @@
+//Sławomir Kalandyk
+//Program losuje liczby od 1 do 10 i liczy z nich średnią ważoną
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -7,7 +9,9 @@ double srednia(int *poczatek, int *koniec);
 int main(void)
 {
     srand(time(NULL));
-    int dlugoscTablicy = 10;
+    int dlugoscTablicy = 0;
+    printf("Podaj długość tablicy:\n");
+    scanf("%d", &dlugoscTablicy);
     int tab[dlugoscTablicy];
 
     for(int i = 0; i < dlugoscTablicy; i++)
