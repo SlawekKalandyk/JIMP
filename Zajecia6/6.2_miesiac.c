@@ -2,8 +2,8 @@
 //Nie jestem pewny czy dobrze zinterpretowałem zadanie, moje rozwiązanie pokazuje
 //aktualny miesiąc w formacie !!! pon wt śr czw pią sob nie !!! w każdej linijce,
 //gdzie x oznacza dni z przeszłego lub kolejnego miesiąca.
-//Można sprawdzić dla dowolnego zmieniając wartości miesiac, dzienTygodnia i dzienMiesiaca
-//i wprowadzając odpowiednie wartości 
+//Można sprawdzić dla dowolnego miesiąca zmieniając wartości miesiac, dzienTygodnia i dzienMiesiaca
+//i wprowadzając odpowiednie wartości
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
