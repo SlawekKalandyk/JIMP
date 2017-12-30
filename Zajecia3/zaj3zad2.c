@@ -2,13 +2,13 @@
 
 #include <stdio.h>
 
-double celsToFahr(double cels);
-double fahrToCels(double fahr);
+double celsjuszNaFahrenheit(double celsjusz);
+double fahrenheitNaCelsjusz(double fahrenheit);
 
 int main(void)
 {
-	int wybor;
-	double temperatura;
+	int wybor = 0;
+	double temperatura = 0;
 	printf("Podaj temperaturę:\n");
 	scanf("%lf", &temperatura);
 	printf("Konwersja Celsjusz -> Fahrenheit wciśnij 1, Fahrenheit -> Celsjusz wciśnij 2:\n");
@@ -17,25 +17,25 @@ int main(void)
 	switch(wybor)
 	{
 		case 1:
-		printf("Podana temperatura w stopniach Fahrenheita to: %lf\n", celsToFahr(temperatura));
+		printf("Podana temperatura w stopniach Fahrenheita to: %lf\n", celsjuszNaFahrenheit(temperatura));
 		break;
 		
 		case 2:
-		printf("Podana temperatura w stopniach Celsjusza to: %lf\n", fahrToCels(temperatura));
+		printf("Podana temperatura w stopniach Celsjusza to: %lf\n", fahrenheitNaCelsjusz(temperatura));
 		break;
 	}
 
 	return 0;
 }
 
-double celsToFahr(double cels)
+double celsjuszNaFahrenheit(double celsjusz)
 {
-	double fahr = 32 + (9 * cels) / 5;
-	return fahr;
+	double fahrenheit = 32 + (9 * celsjusz) / 5;
+	return fahrenheit;
 }
 
-double fahrToCels(double fahr)
+double fahrenheitNaCelsjusz(double fahrenheit)
 {
-	double cels = (5 * (fahr - 32)) / 9;
-	return cels;
+	double celsjusz = (5 * (fahrenheit - 32)) / 9;
+	return celsjusz;
 }

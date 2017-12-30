@@ -9,22 +9,22 @@
 #include <time.h>
 
 void szukanie(int liczba, int licznik, double poczatekZakresu, double koniecZakresu);
-int losowanie();
 
 int main(void)
 {
 	srand(time(NULL));
-	int podanaLiczba;
+	int podanaLiczba = 0;
 	int licznikKrokow = 0;
 	int poczatek = 1;
 	int koniec = 10;
-	printf("Podaj liczbę całkowitą z zakresu [1,10]:\n");
+
+	printf("Podaj liczbę całkowitą z zakresu [%d,%d]:\n", poczatek, koniec);
 	scanf("%d", &podanaLiczba);
 
-	if(podanaLiczba < 1 || podanaLiczba > 10)
+	if(podanaLiczba < poczatek || podanaLiczba > koniec)
 	{
-		printf("Podałeś liczbę z poza zakresu.\nZostanie wylosowana liczba z przedziału [1,10]\n");
-		podanaLiczba = losowanie();
+		printf("Podałeś liczbę z poza zakresu.\nZostanie wylosowana liczba z przedziału [%d,%d]\n", poczatek, koniec);
+		podanaLiczba = rand() % koniec + poczatek;
 	}
 	szukanie(podanaLiczba, licznikKrokow, poczatek - 1, koniec);
 
@@ -49,10 +49,4 @@ void szukanie(int liczba, int licznik, double poczatekZakresu, double koniecZakr
 		koniecZakresu = zmienna;
 		szukanie(liczba, licznik, poczatekZakresu, koniecZakresu);
 	}
-}
-
-int losowanie()
-{
-	int tmp = rand() % 10 + 1;
-	return tmp;	
 }

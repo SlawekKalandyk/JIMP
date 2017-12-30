@@ -5,19 +5,18 @@
 #include <time.h>
 
 void printLiczba(int liczba);
-int losowanie();
 
 int main(void)
 {
 	srand(time(NULL));
-	int podanaLiczba;
+	int podanaLiczba = 0;
 	printf("Podaj liczbę z przedziału [1,10]:\n");
 	scanf("%d", &podanaLiczba);
 
 	if(podanaLiczba > 10 || podanaLiczba < 1)
 	{
 		printf("Liczba którą podałeś leży poza dozwolonym przedziałem.\nZostanie wylosowana liczba z przedziału [1,10]\n");
-		podanaLiczba = losowanie();
+		podanaLiczba = rand() % 10 + 1;
 	}
 	if(podanaLiczba > 5)
 	{
@@ -61,10 +60,4 @@ int main(void)
 void printLiczba(int liczba)
 {
 	printf("Podana liczba to %d\n", liczba);
-}
-
-int losowanie()
-{
-	int tmp = rand() % 10 + 1;
-	return tmp;
 }

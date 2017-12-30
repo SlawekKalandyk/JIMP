@@ -26,7 +26,7 @@ int main(void)
 		wartoscPorownania = porownanie(godzina1, godzina2);
 		if(wartoscPorownania == 1)
 			printf("Godzina pierwsza jest późniejsza niż godzina druga\n");
-		else if(wartoscPorownania == (-1))
+		else if(wartoscPorownania == -1)
 			printf("Godzina druga jest późniejsza niż godzina pierwsza\n");
 		else
 			printf("Podane godziny są sobie równe\n");
@@ -75,19 +75,19 @@ int porownanie(int godzina1[], int godzina2[])
 	if(godzina1[0] > godzina2[0])
 		return 1;
 	else if(godzina1[0] < godzina2[0])
-		return (-1);
+		return -1;
 	else
 	{
 		if(godzina1[1] > godzina2[1])
 			return 1;
 		else if(godzina1[1] < godzina2[1])
-			return (-1);
+			return -1;
 		else
 		{
 			if(godzina1[2] > godzina2[2])
 				return 1;
 			else if(godzina1[2] < godzina2[2])
-				return (-1);
+				return -1;
 			else
 				return 0;
 		}

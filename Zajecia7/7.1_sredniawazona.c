@@ -19,6 +19,7 @@ int main(void)
 
     for(int i = 0; i < dlugoscTablicy; i++)
         printf("tab[%d] = %d\n", i, tab[i]);
+        
     printf("Srednia ważona wynosi %lf\n", srednia(&tab[0], &tab[dlugoscTablicy - 1]));
 
     return 0;
@@ -38,5 +39,4 @@ double srednia(int *poczatek, int *koniec)
     }
 
     return suma / dzielnik;
-    
 }
