@@ -1,7 +1,5 @@
 //Sławomir Kalandyk
 //Program musi zostać skompilowany z flagą -lm, np. gcc zaj4zad2.c -lm -Wall -Wextra -pedantic
-//Jest to wersja rekurencyjna, przesyłam ją tylko do wglądu bo działa dobrze lecz ilość kroków jest błędna
-//Odnośnie podpunktu 3., w przedziale [1,10] maksymalną liczba kroków jest 3 *** poprawić bo wychodzi 4 
 
 #include <stdio.h>
 #include <math.h>
