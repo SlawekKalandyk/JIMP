@@ -12,7 +12,7 @@ double obwodTrojkata(double bokTrojkata1, double bokTrojkata2, double bokTrojkat
 double poleTrojkata(double bokTrojkata1, double bokTrojkata2, double bokTrojkata3);
 double obwodKola(double promien);
 double poleKola(double promien);
-int sprawdzenieWymiarow(double wymiary[]);
+int sprawdzanieWymiarowWzgledem0(double wymiary[]);
 
 int main(void)
 {
@@ -27,7 +27,7 @@ int main(void)
 			printf("Podaj bok kwadratu:\n");
 			scanf("%lf", &wymiary[0]);
 
-			if(sprawdzenieWymiarow(wymiary))
+			if(sprawdzanieWymiarowWzgledem0(wymiary))
 				printf("Bok kwadratu nie może być mniejszy lub równy 0\n");
 			else
 				printf("Pole: %lf\nObwód: %lf\n", poleKwadratu(wymiary[0]), obwodKwadratu(wymiary[0]));
@@ -37,7 +37,7 @@ int main(void)
 			printf("Podaj boki prostokąta:\n");
 			scanf("%lf %lf", &wymiary[0], &wymiary[1]);
 
-			if(sprawdzenieWymiarow(wymiary))
+			if(sprawdzanieWymiarowWzgledem0(wymiary))
 				printf("Bok prostokąta nie może być mniejszy lub równy 0\n");
 			else
 				printf("Pole: %lf\nObwód: %lf\n", poleProstokata(wymiary[0], wymiary[1]), obwodProstokata(wymiary[0], wymiary[1]));
@@ -47,7 +47,7 @@ int main(void)
 			printf("Podaj boki trójkąta:\n");
 			scanf("%lf %lf %lf", &wymiary[0], &wymiary[1], &wymiary[2]);
 
-			if(sprawdzenieWymiarow(wymiary))
+			if(sprawdzanieWymiarowWzgledem0(wymiary))
 				printf("Bok trójkąta nie może być mniejszy lub równy 0\n");
 			else if(wymiary[0] + wymiary[1] > wymiary[2] && wymiary[0] + wymiary[2] > wymiary[1] && wymiary[1] + wymiary[2] > wymiary[0])
 				printf("Pole: %lf\nObwód: %lf\n", poleTrojkata(wymiary[0], wymiary[1], wymiary[2]), obwodTrojkata(wymiary[0], wymiary[1], wymiary[2]));
@@ -59,7 +59,7 @@ int main(void)
 			printf("Podaj promień koła:\n");
 			scanf("%lf", &wymiary[0]);
 
-			if(sprawdzenieWymiarow(wymiary))
+			if(sprawdzanieWymiarowWzgledem0(wymiary))
 				printf("Promień koła nie może być mniejszy lub równy 0\n");
 			else
 				printf("Pole:%lf\nObwód:%lf\n", poleKola(wymiary[0]), obwodKola(wymiary[0]));
@@ -113,7 +113,7 @@ double poleKola(double promien)
 {
 	return M_PI * promien * promien;
 }
-int sprawdzenieWymiarow(double wymiary[])
+int sprawdzanieWymiarowWzgledem0(double wymiary[])
 {
 	for(int i = 0; i < 3; i++)
 	{

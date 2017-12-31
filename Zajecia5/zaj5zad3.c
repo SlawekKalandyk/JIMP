@@ -4,30 +4,31 @@
 #include <stdlib.h>
 #include <time.h>
 
-void losowanieElementowMacierzy2d(int macierz[2][2]);
+void losowanieElementowMacierzy(int wymiar, int macierz[2][2]);
 void polaczMacierze2d(int macierz3d[2][2][2], int macierz2d1[2][2], int macierz2d2[2][2]);
-void mnozenieMacierzy(int macierz[2][2][2]);
+void mnozenieMacierzy2x2(int macierz[2][2][2]);
 
 int main(void)
 {
 	srand(time(NULL));
-	int macierz3d[2][2][2] = {0};
-	int macierz2d1[2][2] = {0};
-	int macierz2d2[2][2] = {0};
+	int wymiarMacierzy = 2;
+	int macierz3d[2][wymiarMacierzy][wymiarMacierzy];
+	int macierz2d1[wymiarMacierzy][wymiarMacierzy];
+	int macierz2d2[wymiarMacierzy][wymiarMacierzy];
 
-	losowanieElementowMacierzy2d(macierz2d1);
-	losowanieElementowMacierzy2d(macierz2d2);
+	losowanieElementowMacierzy(wymiarMacierzy, macierz2d1);
+	losowanieElementowMacierzy(wymiarMacierzy, macierz2d2);
 	polaczMacierze2d(macierz3d, macierz2d1, macierz2d2);
-	mnozenieMacierzy(macierz3d);
+	mnozenieMacierzy2x2(macierz3d);
 
 	return 0;
 }
 
-void losowanieElementowMacierzy2d(int macierz[2][2])
+void losowanieElementowMacierzy(int wymiar, int macierz[wymiar][wymiar])
 {
-	for(int i = 0; i < 2; i++)
+	for(int i = 0; i < wymiar; i++)
 	{
-		for(int j = 0; j < 2; j++)
+		for(int j = 0; j < wymiar; j++)
 			macierz[i][j] = rand() % 201 - 100;
 	}
 }
@@ -44,9 +45,9 @@ void polaczMacierze2d(int macierz3d[2][2][2], int macierz2d1[2][2], int macierz2
 	}
 }
 
-void mnozenieMacierzy(int macierz[2][2][2])
+void mnozenieMacierzy2x2(int macierz[2][2][2])
 {
-	int wynikMnozenia[2][2] = {0};
+	int wynikMnozenia[2][2];
 
 	for(int i = 0; i < 2; i++)
 	{

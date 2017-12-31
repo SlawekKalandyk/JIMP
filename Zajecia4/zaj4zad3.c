@@ -8,8 +8,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-int suma(int kulki[], int poczatek, int ilosc);
-int waga(int kulki[], int poczatek, int ilosc);
+int masaGrupyKulek(int kulki[], int poczatek, int ilosc);
+int wazenieKulek(int kulki[], int poczatek, int ilosc);
 void sprawdzeniePoprawnosciWazenia(int kulki[]);
 
 int main(void)
@@ -22,8 +22,8 @@ int main(void)
 	int kulki[9] = {0};
 	kulki[losowanieNr] = 1;
 
-	wazenie1 = waga(kulki, 0, 3);
-	wazenie2 = waga(kulki, wazenie1, 1);
+	wazenie1 = wazenieKulek(kulki, 0, 3);
+	wazenie2 = wazenieKulek(kulki, wazenie1, 1);
 	najciezsza = wazenie2;
 	printf("Najcięższa kulka ma nr %d\n", najciezsza);
 	sprawdzeniePoprawnosciWazenia(kulki);
@@ -31,7 +31,7 @@ int main(void)
 	return 0;
 }
 
-int suma(int kulki[], int poczatek, int ilosc)
+int masaGrupyKulek(int kulki[], int poczatek, int ilosc)
 {
 	int grupa = 0;
 
@@ -41,10 +41,10 @@ int suma(int kulki[], int poczatek, int ilosc)
 	return grupa;	
 }
 
-int waga(int kulki[], int poczatek, int ilosc)
+int wazenieKulek(int kulki[], int poczatek, int ilosc)
 {
-	int grupa1 = suma(kulki, poczatek, ilosc);
-	int grupa2 = suma(kulki, poczatek + ilosc, ilosc);
+	int grupa1 = masaGrupyKulek(kulki, poczatek, ilosc);
+	int grupa2 = masaGrupyKulek(kulki, poczatek + ilosc, ilosc);
 
 	if(grupa1 > grupa2)
 		return poczatek;
