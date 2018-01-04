@@ -5,23 +5,23 @@
 #include <stdlib.h>
 #include <string.h>
 
-void printLine(char *napis, int *tab, int rozmiarTab);
+void printLine(char *napis, int *tab, int *rozmiarTab);
 
 int main(void)
 {
     char *tekst = "Podaj pierwszy bok trójkąta: %dPodaj drugi bok trójkąta: %dPodaj trzeci bok trójkąta: %d\n";
     int *tab;
-    int poczatkowyRozmiarTab = 1;
+    int rozmiarTab = 0;
 
-    tab = (int*)malloc(poczatkowyRozmiarTab * sizeof(tab[0]));
-    printLine(tekst, tab, poczatkowyRozmiarTab);
+    tab = (int*)malloc(rozmiarTab * sizeof(tab[0]));
+    printLine(tekst, tab, &rozmiarTab);
 
     free(tab);
 
     return 0;
 }
 
-void printLine(char *napis, int *tab, int rozmiarTab)
+void printLine(char *napis, int *tab, int *rozmiarTab)
 {
     int licznik = 0;
     int index = 0;
@@ -36,15 +36,15 @@ void printLine(char *napis, int *tab, int rozmiarTab)
 
             scanf("%d", &tab[index]);
             index += 1;
+            *rozmiarTab += 1;
             licznik = i + 2;
-            check = realloc(tab, (rozmiarTab + index) * sizeof(tab[0]));
+            check = realloc(tab, *rozmiarTab * sizeof(tab[0]));
 
             if(!check)
             {
                 free(tab);
                 printf("Wystąpił błąd w zwiększaniu rozmiaru tablicy zmiennych\n");
             }
-            
         }
     }
 
