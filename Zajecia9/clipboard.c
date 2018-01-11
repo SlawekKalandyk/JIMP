@@ -21,12 +21,16 @@ int set(const char *text)
 {
     int n = 0;
 
+    if(text == NULL)
+        return 0;
+
     for(int i = 0; i < (int) strlen(text) && i < capacity(); i++)
     {
         if(safe[n].size == chunkSize)
-            n ++;
-            
+            n++;
+
         safe[n].text[i - n * chunkSize] = text[i];
+        safe[n].size += 1;
     }
 
     return 1;
@@ -37,6 +41,7 @@ void printToStdout(void)
     for(int i = 0; i < chunkCount; i++)
     {
         printf("%s", safe[i].text);
+        safe[i].readCounter ++;
     }
 
     printf("\n");
@@ -44,7 +49,29 @@ void printToStdout(void)
 
 int append(const char *text)
 {
+    int n = 0;
 
+    if(text == NULL)
+        return 0;
+
+    while(safe[n].size == 5)
+    {
+        if(n == chunkCount - 1)
+            return 0;
+
+        n++;
+    }
+
+    for(int i = n * chunkSize + safe[n].size - 1, j = 0; j < (int) strlen(text) && i < capacity(); i++, j++)
+    {
+        if(safe[n].size == 5)
+            n++;
+        
+        safe[n].text[safe[n].size] = text[j];
+        safe[n].size += 1;
+    }
+
+    return 1;
 }
 
 void clean(void)
