@@ -8,5 +8,8 @@ typedef struct _Matrix
 void initialisation(Matrix *matrix);
 void matrixSize(char *rawData, Matrix *matrix);
 void memoryAllocation(Matrix *matrix);
-int dataFormatting(char *rawData, Matrix matrix);
-void addition(Matrix matrix1, Matrix matrix2);
+int dataFormatting(char *rawData, Matrix *matrix);
+void matrixCreation(char *rawData, Matrix *matrix);
+void addition(void);
+void subtraction(void);
+void multiplication(void);

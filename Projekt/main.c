@@ -5,8 +5,6 @@
 int main(void)
 {
     int choice = 0;
-    char rawData[255];
-    Matrix matrix1, matrix2;
 
     printf("Witaj w kalkulatorze macierzy.\n"
             "Działania na jednej macierzy:\n"
@@ -18,40 +16,39 @@ int main(void)
             "5. Dodawanie\n"
             "6. Odejmowanie\n"
             "7. Mnożenie\n"
+            "8. Wyjdź z programu\n"
             "Wybierz działanie:\n");
 
     scanf("%d", &choice);
 
-    switch(choice)
-    {
-        case 1:
-        break;
+    //while(choice != 8)
+    //{
+        switch(choice)
+        {
+            case 1:
+            break;
 
-        case 2:
+            case 2:
 
-        break;
-    }
+            break;
 
-    initialisation(&matrix1);
-    matrixSize("[1 2;3 4;5 6]", &matrix1);
-    memoryAllocation(&matrix1);
-    dataFormatting("[1 2;3 4;5 6]", matrix1);
+            case 5:
+                addition();
+            break;
 
-    initialisation(&matrix2);
-    matrixSize("[1 2;3 4;5 6]", &matrix2);
-    memoryAllocation(&matrix2);
-    dataFormatting("[1 2;3 4;5 6]", matrix2);
+            case 6:
+                subtraction();
+            break;
 
-    for(int i = 0; i < matrix1.rows; i++)
-    {
-        for(int j = 0; j < matrix1.columns; j++)
-            printf("%d ", matrix1.array[i][j]);
-        printf("\n");
-    }
-
-    for(int i = 0; i < matrix1.rows; i++)
-        free(matrix1.array[i]);
-    free(matrix1.array);
+            case 7:
+                multiplication();
+            break;
+            
+            case 8:
+                return 0;
+            break;
+        }
+    //}
 
     return 0;
 }
