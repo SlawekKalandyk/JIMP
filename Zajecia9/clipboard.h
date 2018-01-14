@@ -1,3 +1,4 @@
+// Sławomir Kalandyk
 int set(const char *text);
 void printToStdout(void);
 int append(const char *text);

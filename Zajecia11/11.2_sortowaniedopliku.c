@@ -1,7 +1,8 @@
+// Sławomir Kalandyk
 #include <stdio.h>
 #include <stdlib.h>
 
-void tworzenieTablicy(int *tab, int iloscLinii, FILE *plik);
+void tworzenieTablicy(int *tab, FILE *plik);
 void sortowanie(int *tab, int iloscLiczb);
 void wpisanieDoPliku(int *tab, int iloscLiczb, FILE *plik);
 void wyswietleniePosortowanegoPliku(int *tab, int iloscLiczb);
@@ -14,13 +15,29 @@ int main(int argc, char **argv)
     int *tab;
     int iloscLiczb;
 
-    if(argc > 2)
+    if(argc < 2)
+    {
+        printf("Nie podałeś argumentów podczas uruchamiania programu\n");
+        return 0;
+    }
+    else if(argc < 3)
+    {  
+        printf("Podałes tylko 1 argument podczas uruchamiania programu\n");
+        return 0;
+    }
+    else if(argc == 3)
     {
         plikIn = fopen(argv[1], "r");
+
+        if(plikIn == NULL)
+        {
+                printf("Plik który podałeś do odczytu prawdopodobnie nie istnieje\n");
+                return 0;
+        }
         plikOut = fopen(argv[2], "a");
         iloscLiczb = iloscLiniiWPliku(plikIn);
         tab = (int*) malloc (iloscLiczb * sizeof *tab);
-        tworzenieTablicy(tab, iloscLiczb, plikIn);
+        tworzenieTablicy(tab, plikIn);
         sortowanie(tab, iloscLiczb);
         wpisanieDoPliku(tab, iloscLiczb, plikOut);
         fclose(plikIn);
@@ -31,7 +48,7 @@ int main(int argc, char **argv)
         plikIn = fopen(argv[1], "r");
         iloscLiczb = iloscLiniiWPliku(plikIn);
         tab = (int*) malloc (iloscLiczb * sizeof *tab);
-        tworzenieTablicy(tab, iloscLiczb, plikIn);
+        tworzenieTablicy(tab, plikIn);
         sortowanie(tab, iloscLiczb);
         wyswietleniePosortowanegoPliku(tab, iloscLiczb);
         fclose(plikIn);
@@ -42,7 +59,7 @@ int main(int argc, char **argv)
     return 0;
 }
 
-void tworzenieTablicy(int *tab, int iloscLinii, FILE *plik)
+void tworzenieTablicy(int *tab, FILE *plik)
 {
     char trescLinii[255];
     char c;

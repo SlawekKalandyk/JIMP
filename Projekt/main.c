@@ -2,9 +2,14 @@
 #include <stdlib.h>
 #include "declarations.h"
 
+#define charArraySize 200
+
 int main(void)
 {
     int choice = 0;
+    Matrix matrix1, matrix2;
+    char data1[charArraySize];
+    char data2[charArraySize];
 
     printf("Witaj w kalkulatorze macierzy.\n"
             "Działania na jednej macierzy:\n"
@@ -29,19 +34,52 @@ int main(void)
             break;
 
             case 2:
+                printf("Wybrałeś transpozycję macierzy\n");
+                printf("Wprowadź macierz:\n");
+                scanf("%s", data1);
+                matrixCreation(data1, &matrix1);
+                transposition(&matrix1);
+            break;
 
+            case 3:
+                printf("Wybrałeś rozkład LU\n");
+                printf("Wprowadź macierz:\n");
+                scanf("%s", data1);
+                matrixCreation(data1, &matrix1);
+                LUdecomposition(&matrix1);
             break;
 
             case 5:
-                addition();
+                printf("Wybrałeś dodawanie\n");
+                printf("Wprowadź pierwszą macierz:\n");
+                scanf("%s", data1);
+                printf("Wprowadź drugą macierz:\n");
+                scanf("%s", data2);
+                matrixCreation(data1, &matrix1);
+                matrixCreation(data2, &matrix2);
+                addition(&matrix1, &matrix2);
             break;
 
             case 6:
-                subtraction();
+                printf("Wybrałeś odejmowanie\n");
+                printf("Wprowadź pierwszą macierz:\n");
+                scanf("%s", data1);
+                printf("Wprowadź drugą macierz:\n");
+                scanf("%s", data2);
+                matrixCreation(data1, &matrix1);
+                matrixCreation(data2, &matrix2);
+                subtraction(&matrix1, &matrix2);
             break;
 
             case 7:
-                multiplication();
+                printf("Wybrałeś mnożenie\n");
+                printf("Wprowadź pierwszą macierz:\n");
+                scanf("%s", data1);
+                printf("Wprowadź drugą macierz:\n");
+                scanf("%s", data2);
+                matrixCreation(data1, &matrix1);
+                matrixCreation(data2, &matrix2);
+                multiplication(&matrix1, &matrix2);
             break;
             
             case 8:

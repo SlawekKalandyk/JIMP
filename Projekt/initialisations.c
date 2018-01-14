@@ -89,27 +89,48 @@ void matrixCreation(char *rawData, Matrix *matrix)
     dataFormatting(rawData, matrix);
 }
 
-void addition(void)
+void transposition(Matrix *matrix)
 {
-    Matrix matrix1, matrix2;
-    char data1[charArraySize];
-    char data2[charArraySize];
-    
-    printf("Wybrałeś dodawanie\n");
-    printf("Wprowadź pierwszą macierz:\n");
-    scanf("%s", data1);
-    printf("Wprowadź drugą macierz:\n");
-    scanf("%s", data2);
-    matrixCreation(data1, &matrix1);
-    matrixCreation(data2, &matrix2);
+    int a = 0;
 
-    if(matrix1.rows == matrix2.rows && matrix1.columns == matrix2.columns)
+    int tab[matrix->rows][matrix->columns];
+
+    for(int i = 0; i < matrix->rows; i++)
     {
-        for(int i = 0; i < matrix1.rows; i++)
+        for(int j = 0; j < matrix->columns; j++)
+            tab[i][j] = matrix->array[i][j];
+
+        free(matrix->array[i]);
+    }
+
+    free(matrix->array);
+    a = matrix->rows;
+    matrix->rows = matrix->columns;
+    matrix->columns = a;
+
+    memoryAllocation(matrix);
+
+    for(int i = 0; i < matrix->rows; i++)
+    {
+        for(int j = 0; j < matrix->columns; j++)
         {
-            for(int j = 0; j < matrix2.columns; j++)
+            matrix->array[i][j] = tab[j][i];
+            printf("%d ", matrix->array[i][j]);
+        }
+
+        printf("\n");
+    }
+}
+
+void addition(Matrix *matrix1, Matrix *matrix2)
+{
+    if(matrix1->rows == matrix2->rows && matrix1->columns == matrix2->columns)
+    {
+        for(int i = 0; i < matrix1->rows; i++)
+        {
+            for(int j = 0; j < matrix2->columns; j++)
             {
-                printf("%d ", matrix1.array[i][j] + matrix2.array[i][j]);
+                printf("%d ", matrix1->array[i][j] + matrix2->array[i][j]);
             }
 
             printf("\n");
@@ -119,27 +140,15 @@ void addition(void)
         printf("Ilość wierszy lub kolumn macierzy pierwszej i drugiej nie są sobie równe!\n");
 }
 
-void subtraction(void)
+void subtraction(Matrix *matrix1, Matrix *matrix2)
 {
-    Matrix matrix1, matrix2;
-    char data1[charArraySize];
-    char data2[charArraySize];
-    
-    printf("Wybrałeś odejmowanie\n");
-    printf("Wprowadź pierwszą macierz:\n");
-    scanf("%s", data1);
-    printf("Wprowadź drugą macierz:\n");
-    scanf("%s", data2);
-    matrixCreation(data1, &matrix1);
-    matrixCreation(data2, &matrix2);
-
-    if(matrix1.rows == matrix2.rows && matrix1.columns == matrix2.columns)
+    if(matrix1->rows == matrix2->rows && matrix1->columns == matrix2->columns)
     {
-        for(int i = 0; i < matrix1.rows; i++)
+        for(int i = 0; i < matrix1->rows; i++)
         {
-            for(int j = 0; j < matrix2.columns; j++)
+            for(int j = 0; j < matrix2->columns; j++)
             {
-                printf("%d ", matrix1.array[i][j] - matrix2.array[i][j]);
+                printf("%d ", matrix1->array[i][j] - matrix2->array[i][j]);
             }
 
             printf("\n");
@@ -149,29 +158,18 @@ void subtraction(void)
         printf("Ilość wierszy lub kolumn macierzy pierwszej i drugiej nie są sobie równe!\n");
 }
 
-void multiplication(void)
+void multiplication(Matrix *matrix1, Matrix *matrix2)
 {
-    Matrix matrix1, matrix2;
-    char data1[charArraySize];
-    char data2[charArraySize];
     int result = 0;
 
-    printf("Wybrałeś mnożenie\n");
-    printf("Wprowadź pierwszą macierz:\n");
-    scanf("%s", data1);
-    printf("Wprowadź drugą macierz:\n");
-    scanf("%s", data2);
-    matrixCreation(data1, &matrix1);
-    matrixCreation(data2, &matrix2);
-
-    if(matrix1.columns == matrix2.rows)
+    if(matrix1->columns == matrix2->rows)
     {
-        for(int i = 0; i < matrix1.rows; i++)
+        for(int i = 0; i < matrix1->rows; i++)
         {
-            for(int j = 0; j < matrix2.columns; j++)
+            for(int j = 0; j < matrix2->columns; j++)
             {
-                for(int n = 0; n < matrix1.columns; n++)
-                    result += matrix1.array[i][n] * matrix2.array[n][j];
+                for(int n = 0; n < matrix1->columns; n++)
+                    result += matrix1->array[i][n] * matrix2->array[n][j];
 
                 printf("%d ", result);
                 result = 0;
@@ -182,4 +180,9 @@ void multiplication(void)
     }
     else
         printf("Ilość kolumn pierwszej macierzy i wierszy drugiej macierzy nie są sobie równe!\n");
+}
+
+void LUdecomposition(Matrix *matrix)
+{
+
 }

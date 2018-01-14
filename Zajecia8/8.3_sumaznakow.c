@@ -1,3 +1,4 @@
+//Sławomir Kalandyk
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -24,7 +25,6 @@ long long copyArgumentAndPrintCharByCharReturningSumOfArguments(void *data, int 
     long long sum = 0;
 
     memcpy(arrayOfChars, data, dataSize);
-    //arrayOfChars[dataSize] = '\0';
 
     for(int i = 0; i < dataSize; i++)
     {

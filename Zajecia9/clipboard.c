@@ -1,3 +1,4 @@
+// Sławomir Kalandyk
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -54,7 +55,7 @@ int append(const char *text)
     if(text == NULL)
         return 0;
 
-    while(safe[n].size == 5)
+    while(safe[n].size == chunkSize)
     {
         if(n == chunkCount - 1)
             return 0;
@@ -64,7 +65,7 @@ int append(const char *text)
 
     for(int i = n * chunkSize + safe[n].size - 1, j = 0; j < (int) strlen(text) && i < capacity(); i++, j++)
     {
-        if(safe[n].size == 5)
+        if(safe[n].size == chunkSize)
             n++;
         
         safe[n].text[safe[n].size] = text[j];

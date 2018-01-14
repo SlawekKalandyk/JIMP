@@ -1,3 +1,5 @@
+//  Sławomir Kalandyk
+//  Działa, ale z kodu dominanty nie jestem zbyt dumny
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -6,20 +8,22 @@
 void wprowadzenieLiczb(double *tab, int *iloscLiczb);
 void sortowanieTablicy(double *tab, int iloscLiczb);
 void wyswietlenieTablicy(double *tab, int iloscLiczb);
-void wyswietlenieWynikow(double suma, double srednia, double mediana);
+void wyswietlenieWynikow(double suma, double srednia, double mediana, double dominanta, int kontrola);
 int sprawdzenieIlosciElementowTablicy(int iloscLiczb);
 double suma(double *tab, int iloscLiczb);
-double dominanta(double *tab, int iloscLiczb);
+void dominanta(double *tab, int iloscLiczb, double *dominantaLiczb, int *kontrola);
 double srednia(int iloscLiczb, double suma);
 double mediana(double *tab, int iloscLiczb);
 
 int main(void)
 {
     double *tab;
+    int kontrola = 1;
     int iloscLiczb = 0;
     double sumaLiczb = 0;
     double sredniaLiczb = 0;
     double medianaLiczb = 0;
+    double dominantaLiczb = 0;
 
     printf("Podaj ilosc liczb:\n");
     scanf("%d", &iloscLiczb);
@@ -40,7 +44,8 @@ int main(void)
     sumaLiczb = suma(tab, iloscLiczb);
     sredniaLiczb = srednia(iloscLiczb, sumaLiczb);
     medianaLiczb = mediana(tab, iloscLiczb);
-    wyswietlenieWynikow(sumaLiczb, sredniaLiczb, medianaLiczb);
+    dominanta(tab, iloscLiczb, &dominantaLiczb, &kontrola);
+    wyswietlenieWynikow(sumaLiczb, sredniaLiczb, medianaLiczb, dominantaLiczb, kontrola);
 
     free(tab);
 
@@ -89,11 +94,12 @@ void wyswietlenieTablicy(double *tab, int iloscLiczb)
         printf("tab[%d] = %lf\n", i, tab[i]);
 }
 
-void wyswietlenieWynikow(double suma, double srednia, double mediana)
+void wyswietlenieWynikow(double suma, double srednia, double mediana, double dominanta, int kontrola)
 {
     int sumaInt = suma + 1e-9;
     int sredniaInt = srednia + 1e-9;
     int medianaInt = mediana + 1e-9;
+    int dominantaInt = dominanta + 1e-9;
 
     if(suma - sumaInt != 0)
         printf("%lf\n", suma);
@@ -105,10 +111,17 @@ void wyswietlenieWynikow(double suma, double srednia, double mediana)
     else
         printf("%d %o %0X\n", sredniaInt, sredniaInt, sredniaInt);
 
-    if(mediana - sredniaInt != 0)
+    if(mediana - medianaInt != 0)
         printf("%lf\n", mediana);
     else
         printf("%d %o %0X\n", medianaInt, medianaInt, medianaInt);
+
+    if(kontrola == 0)
+        printf("Brak dominanty\n");
+    else if(dominanta - dominantaInt != 0)
+        printf("%lf\n", dominanta);
+    else
+        printf("%d %o %0X\n", dominantaInt, dominantaInt, dominantaInt);
 
 }
 
@@ -138,15 +151,68 @@ double suma(double *tab, int iloscLiczb)
     return suma;
 }
 
-double dominanta(double *tab, int iloscLiczb)
+void dominanta(double *tab, int iloscLiczb, double *dominantaLiczb, int *kontrola)
 {
-    int licznik[iloscLiczb];
+    double dominanta = 0;
+    double unikalneLiczby[iloscLiczb];
+    int iloscWystapien[iloscLiczb];
+    int n = 0;
+    int max = 0;
+    int licznikKontroli = 0;
 
-    for(int i = 0, j = 0; i < iloscLiczb; i++)
+    for(int i = 0; i < iloscLiczb; i++)
     {
-    
+        unikalneLiczby[i] = 0;
+        iloscWystapien[i] = 0;
     }
 
+    for(int i = 0, licznik = 0; i < iloscLiczb; i++)
+    {
+        for(int j = 0; j < n; j++)
+        {
+            if(tab[i] == unikalneLiczby[j])
+            {
+                iloscWystapien[j]++;
+                licznik++;
+            }
+        }
+
+        if(licznik == 0)
+        {
+            unikalneLiczby[n] = tab[i];
+            iloscWystapien[n]++;
+            n++;
+        }
+        
+        licznik = 0;
+    }
+
+    max = iloscWystapien[0];
+
+    for(int i = 1; i < n; i++)
+    {
+        if(max < iloscWystapien[i])
+            max = iloscWystapien[i];
+    }
+    
+    for(int i = 0; i < n; i++)
+    {
+        if(iloscWystapien[i] == max)
+            licznikKontroli++;
+    }
+
+    if(licznikKontroli != 1)
+        *kontrola = 0;
+
+    dominanta = unikalneLiczby[0]; 
+
+    for(int i = 0; i < n; i++)
+    {
+        if(iloscWystapien[i] < iloscWystapien[i + 1])
+            dominanta = unikalneLiczby[i + 1];
+    }
+
+    *dominantaLiczb = dominanta;
 }
 
 double srednia(int iloscLiczb, double suma)
