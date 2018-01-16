@@ -1,3 +1,4 @@
+// Sławomir Kalandyk
 typedef struct _Vector
 {
     int *array;

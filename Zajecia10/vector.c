@@ -1,3 +1,4 @@
+// Sławomir Kalandyk
 #include <stdio.h>
 #include <stdlib.h>
 #include "vector.h"
@@ -51,6 +52,12 @@ void empty(Vector *vector)
 
 void pushBack(Vector *vector, int element)
 {
+    if(vector->amountOfElements == vector->capacity)
+    {
+        vector->capacity += basicCapacity;
+        reserve(vector, vector->capacity);
+    }
+    
     vector->array[vector->amountOfElements] = element;
     vector->amountOfElements++;
 }
@@ -77,8 +84,13 @@ void insert(Vector *vector, int position, int element)
 
 void removeFromEnd(Vector *vector)
 {
-    vector->array[vector->amountOfElements] = 0;
-    vector->amountOfElements--;
+    if(vector->amountOfElements > 0)
+    {    
+        vector->array[vector->amountOfElements] = 0;
+        vector->amountOfElements--;
+    }
+    else
+        printf("Brak elementów w tablicy, nie można usunąć ostatniego elementu\n");
 }
 
 void reverse(Vector *vector)
