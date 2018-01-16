@@ -1,9 +1,17 @@
-void reserve(int *array, int size);
-int size(int *array);
-int capacity(int *array);
-int empty(int *array);
-void push_back(int *array);
-void insert(int *array, int position, int element);
-void removeAtPosition(int *array, int position);
-void reverse(int *array);
-int at(int *array, int position);
+typedef struct _Vector
+{
+    int *array;
+    int capacity;
+    int amountOfElements;
+} Vector;
+
+void initialise(Vector *vector);
+void reserve(Vector *vector, int size);
+int size(Vector *vector);
+int capacity(Vector *vector);
+void empty(Vector *vector);
+void pushBack(Vector *vector, int element);
+void insert(Vector *vector, int position, int element);
+void removeFromEnd(Vector *vector);
+void reverse(Vector *vector);
+int at(Vector *vector, int position);

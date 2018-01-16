@@ -2,55 +2,101 @@
 #include <stdlib.h>
 #include "vector.h"
 
-struct Vector
+#define basicCapacity 50
+
+void initialise(Vector *vector)
 {
-    int *array;
-    int size;
-    int amountOfElements;
+    vector->capacity = basicCapacity;
+    vector->amountOfElements = 0;
+    vector->array = (int*)malloc(vector->capacity * sizeof(int));
 }
 
-void reserve(int *array, int arraySize)
+void reserve(Vector *vector, int size)
 {
-    array = (int*) malloc (arraySize * sizeof *array);
+    if(vector->amountOfElements <= size)
+    {
+        vector->capacity = size;
+        int *newMemory = (int*)realloc(vector->array, vector->capacity * sizeof(int));
+    }
+    else
+    {
+        printf("Na liście jest więcej elementów niż podany rozmiar listy na to pozwala. Część elementów z końca listy zostanie usunięta\n");
 
+        for(int i = size; i < vector->amountOfElements; i++)
+            vector->array[i] = 0;
+
+        vector->capacity = size;
+        vector->amountOfElements = size;
+        int *newMemory = (int*)realloc(vector->array, vector->capacity * sizeof(int));
+    }
+}  
+
+int size(Vector *vector)
+{
+    return vector->amountOfElements;
 }
 
-int size(int *array)
+int capacity(Vector *vector)
 {
-    return sizeof(array) / sizeof(int);
+    return vector->capacity;
 }
 
-int capacity(int *array)
+void empty(Vector *vector)
 {
-    return size;
+    if(vector->amountOfElements)
+        printf("Lista nie jest pusta\n");
+    else
+        printf("Lista jest pusta\n");
 }
 
-int empty(int *array)
+void pushBack(Vector *vector, int element)
 {
-
+    vector->array[vector->amountOfElements] = element;
+    vector->amountOfElements++;
 }
 
-void push_back(int *array)
+void insert(Vector *vector, int position, int element)
 {
+    if(position < vector->amountOfElements )
+    {
+        if(vector->amountOfElements == vector->capacity)
+        {
+            vector->capacity += basicCapacity;
+            reserve(vector, vector->capacity);
+        }
 
+        for(int i = vector->amountOfElements - 1; i >= position; i--)
+            vector->array[i + 1] = vector->array[i];
+
+        vector->array[position] = element;
+        vector->amountOfElements++;
+    }
+    else if(position >= vector->amountOfElements)
+        printf("Nie możesz dodać elementu dla tej pozycji\n");
 }
 
-void insert(int *array, int position, int element)
+void removeFromEnd(Vector *vector)
 {
-
+    vector->array[vector->amountOfElements] = 0;
+    vector->amountOfElements--;
 }
 
-void removeAtPosition(int *array, int position)
+void reverse(Vector *vector)
 {
+    int swapper = 0;
 
+    for(int i = 0; i < vector->amountOfElements / 2; i++)
+    {
+        swapper = vector->array[i];
+        vector->array[i] = vector->array[vector->amountOfElements - 1 - i];
+        vector->array[vector->amountOfElements - 1 - i] = swapper;
+    }
 }
 
-void reverse(int *array)
+int at(Vector *vector, int position)
 {
-
-}
-
-int at(int *array, int position)
-{
-
+    if(position < vector->amountOfElements)
+        printf("%d\n", vector->array[position]);
+    else
+        printf("Brak elementu na tej pozycji\n");
 }
