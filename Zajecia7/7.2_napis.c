@@ -15,7 +15,6 @@ int main(void)
     int *tab = NULL;
     int rozmiarTab = 0;
     
-    tab = (int*)malloc(rozmiarTab * sizeof(tab[0]));
     printLine(tekst, tab, &rozmiarTab);
     
     free(tab);
@@ -27,7 +26,6 @@ void printLine(char *napis, int *tab, int *rozmiarTab)
 {
     int licznikZnakow = 0;
     int index = 0;
-    int *check = 0;
 
     for(unsigned int i = 0; i < strlen(napis) - 1; i++)
     {
@@ -36,17 +34,18 @@ void printLine(char *napis, int *tab, int *rozmiarTab)
             for(unsigned int j = licznikZnakow; j < i; j++)
                 printf("%c", napis[j]);
 
-            scanf("%d", &tab[index]);
-            index += 1;
             *rozmiarTab += 1;
             licznikZnakow = i + 2;
-            check = realloc(tab, *rozmiarTab * sizeof(tab[0]));
+            tab = realloc(tab, *rozmiarTab * sizeof(tab[0]));
 
-            if(!check)
+            if(!tab)
             {
                 free(tab);
                 printf("Wystąpił błąd w zwiększaniu rozmiaru tablicy zmiennych\n");
             }
+
+            scanf("%d", &tab[index]);
+            index += 1;
         }
     }
 

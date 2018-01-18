@@ -17,7 +17,7 @@ void reserve(Vector *vector, int size)
     if(vector->amountOfElements <= size)
     {
         vector->capacity = size;
-        int *newMemory = (int*)realloc(vector->array, vector->capacity * sizeof(int));
+        vector->array = (int*)realloc(vector->array, vector->capacity * sizeof(int));
     }
     else
     {
@@ -28,7 +28,7 @@ void reserve(Vector *vector, int size)
 
         vector->capacity = size;
         vector->amountOfElements = size;
-        int *newMemory = (int*)realloc(vector->array, vector->capacity * sizeof(int));
+        vector->array = (int*)realloc(vector->array, vector->capacity * sizeof(int));
     }
 }  
 
