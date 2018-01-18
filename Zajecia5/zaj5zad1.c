@@ -9,10 +9,10 @@ int porownanieGodzin(int rozmiarTablicy, int godzina1[rozmiarTablicy], int godzi
 
 int main(void)
 {
+	const int skladoweCzasu = 3;
+	const int dlugoscGodzinaString = 8;
 	int wartoscPorownania = 0;
-	int dlugoscGodzinaTab = 3;
-	int dlugoscGodzinaString = 8;
-	int godzina1[dlugoscGodzinaTab], godzina2[dlugoscGodzinaTab];
+	int godzina1[skladoweCzasu], godzina2[skladoweCzasu];
 	char strGodzina1[dlugoscGodzinaString], strGodzina2[dlugoscGodzinaString];
 
 	printf("Podaj pierwszą godzinę w formacie hh:mm:ss\n");
@@ -22,12 +22,12 @@ int main(void)
 	scanf("%s", strGodzina2);
 	sscanf(strGodzina2, "%d:%d:%d", &godzina2[0], &godzina2[1], &godzina2[2]);
 
-	if(porownanieGodzinyzAscii(dlugoscGodzinaString, strGodzina1) //dla czytelności 4 linijki
+	if(porownanieGodzinyzAscii(dlugoscGodzinaString, strGodzina1)
 	&& porownanieGodzinyzAscii(dlugoscGodzinaString, strGodzina2)
-	&& format24Godzinny(dlugoscGodzinaTab, godzina1)
-	&& format24Godzinny(dlugoscGodzinaTab, godzina2))
+	&& format24Godzinny(skladoweCzasu, godzina1)
+	&& format24Godzinny(skladoweCzasu, godzina2))
 	{
-		wartoscPorownania = porownanieGodzin(dlugoscGodzinaTab, godzina1, godzina2);
+		wartoscPorownania = porownanieGodzin(skladoweCzasu, godzina1, godzina2);
 		
 		if(wartoscPorownania == 1)
 			printf("Godzina pierwsza jest późniejsza niż godzina druga\n");
@@ -59,10 +59,8 @@ int porownanieGodzinyzAscii(int rozmiarStringa, char strGodzina[rozmiarStringa])
 				licznik += 1;
 		}
 	}
-	if(licznik == rozmiarStringa)
-		return 1;
-	else
-		return 0;
+
+	return licznik == rozmiarStringa;
 }
 
 int format24Godzinny(int rozmiarTablicy, int godzina[rozmiarTablicy])

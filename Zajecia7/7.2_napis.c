@@ -12,7 +12,7 @@ void printLine(char *napis, int *tab, int *rozmiarTab);
 int main(void)
 {
     char *tekst = "Podaj pierwszy bok trójkąta: %dPodaj drugi bok trójkąta: %dPodaj trzeci bok trójkąta: %d";
-    int *tab;
+    int *tab = NULL;
     int rozmiarTab = 0;
     
     tab = (int*)malloc(rozmiarTab * sizeof(tab[0]));

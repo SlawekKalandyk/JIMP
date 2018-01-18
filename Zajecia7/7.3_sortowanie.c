@@ -2,39 +2,45 @@
 #include <stdlib.h>
 #include <time.h>
 
-void sortowanie(int *tab[10]);
+void losowanieTablicy(int iloscLiczb, int tab[iloscLiczb], int *tabWsk[iloscLiczb]);
+void sortowanie(int iloscLiczb, int *tab[iloscLiczb]);
+void wyswietlenieTablicy(int iloscLiczb, int tab[iloscLiczb]);
+void wyswietlenieTablicyWskaznikow(int iloscLiczb, int *tab[iloscLiczb]);
 
 int main(void)
 {
     srand(time(NULL));
-    int A[10] = {0};
-    int *B[10] = {0};
+    int iloscLiczb = 10;
+    int A[iloscLiczb];
+    int *B[iloscLiczb];
 
     printf("Nieposortowana:\n");
-
-    for(int i = 0; i < 10; i++)
-    {
-        A[i] = rand() % 50 + 1;
-        B[i] = &A[i];
-        printf("A[%d] = %d\n", i, A[i]);
-    }
-
-    sortowanie(B);
+    losowanieTablicy(iloscLiczb, A, B);
+    wyswietlenieTablicy(iloscLiczb, A);
+    
+    sortowanie(iloscLiczb, B);
     printf("Posortowana:\n");
-
-    for(int i = 0; i < 10; i++)
-        printf("A[%d] = %d\n", i, *B[i]);
+    wyswietlenieTablicyWskaznikow(iloscLiczb, B);
 
     return 0;
 }
 
-void sortowanie(int *tab[10])
+void losowanieTablicy(int iloscLiczb, int tab[iloscLiczb], int *tabWsk[iloscLiczb])
+{
+    for(int i = 0; i < iloscLiczb; i++)
+    {
+        tab[i] = rand() % 50 + 1;
+        tabWsk[i] = &tab[i];
+    }
+}
+
+void sortowanie(int iloscLiczb, int *tab[iloscLiczb])
 {
     int *a = 0;
 
-    for(int i = 0; i < 9; i++)
+    for(int i = 0; i < iloscLiczb - 1; i++)
     {
-        for(int n = 0; n < 9 - i; n++)
+        for(int n = 0; n < iloscLiczb - 1 - i; n++)
         {
             if(*tab[n] > *tab[n + 1])
             {
@@ -44,5 +50,16 @@ void sortowanie(int *tab[10])
             }
         }
     }
-    
+}
+
+void wyswietlenieTablicy(int iloscLiczb, int tab[iloscLiczb])
+{
+    for(int i = 0; i < iloscLiczb; i++)
+        printf("A[%d] = %d\n", i, tab[i]);
+}
+
+void wyswietlenieTablicyWskaznikow(int iloscLiczb, int *tab[iloscLiczb])
+{
+    for(int i = 0; i < iloscLiczb; i++)
+        printf("A[%d] = %d\n", i, *tab[i]);
 }

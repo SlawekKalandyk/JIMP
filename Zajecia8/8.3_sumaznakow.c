@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-long long copyArgumentAndPrintCharByCharReturningSumOfArguments(void *data, int rozmiarDanych);
+long long copyArgumentAndPrintCharByCharReturningSumOfArguments(void *data, int dataSize);
 
 int main(void)
 {
@@ -20,7 +20,6 @@ int main(void)
 
 long long copyArgumentAndPrintCharByCharReturningSumOfArguments(void *data, int dataSize)
 {
-
     char arrayOfChars[dataSize];
     long long sum = 0;
 

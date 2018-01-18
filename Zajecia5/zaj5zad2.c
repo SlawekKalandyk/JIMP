@@ -19,6 +19,14 @@ int main(void)
 	return 0;
 }
 
+int wyznacznikMacierzy3x3(int macierz[3][3])
+{
+	int wyznacznik = (macierz[0][0] * macierz[1][1] * macierz [2][2]) + (macierz[1][0] * macierz[2][1] * macierz[0][2]) + (macierz[2][0] * macierz[0][1] * macierz[1][2])
+	- (macierz[1][0] * macierz[0][1] * macierz [2][2]) - (macierz[0][0] * macierz[2][1] * macierz[1][2]) - (macierz[2][0] * macierz[1][1] * macierz[0][2]);
+
+	return wyznacznik;
+}
+
 void losowanieElementowMacierzy(int wymiar, int macierz[wymiar][wymiar])
 {
 	for(int i = 0; i < wymiar; i++)
@@ -29,12 +37,4 @@ void losowanieElementowMacierzy(int wymiar, int macierz[wymiar][wymiar])
 		printf("macierz[%d][%d] = %d\n", i, j, macierz[i][j]);
 		}
 	}
-}
-
-int wyznacznikMacierzy3x3(int macierz[3][3])
-{
-	int wyznacznik = (macierz[0][0] * macierz[1][1] * macierz [2][2]) + (macierz[1][0] * macierz[2][1] * macierz[0][2]) + (macierz[2][0] * macierz[0][1] * macierz[1][2])
-	- (macierz[1][0] * macierz[0][1] * macierz [2][2]) - (macierz[0][0] * macierz[2][1] * macierz[1][2]) - (macierz[2][0] * macierz[1][1] * macierz[0][2]);
-
-	return wyznacznik;
 }

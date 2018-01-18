@@ -112,3 +112,9 @@ int at(Vector *vector, int position)
     else
         printf("Brak elementu na tej pozycji\n");
 }
+
+void printVector(Vector *vector)
+{
+    for(int i = 0; i < vector->amountOfElements; i++)
+        printf("%d\n", vector->array[i]);
+}

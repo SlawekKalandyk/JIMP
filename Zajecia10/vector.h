@@ -1,4 +1,7 @@
 // Sławomir Kalandyk
+#ifndef VECTOR_H
+#define VECTOR_H
+
 typedef struct _Vector
 {
     int *array;
@@ -16,3 +19,6 @@ void insert(Vector *vector, int position, int element);
 void removeFromEnd(Vector *vector);
 void reverse(Vector *vector);
 int at(Vector *vector, int position);
+void printVector(Vector *vector);
+
+#endif

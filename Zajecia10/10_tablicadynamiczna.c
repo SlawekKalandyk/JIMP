@@ -9,27 +9,24 @@ int main(void)
 
     initialise(&vector);
     printf("%d %d\n", size(&vector), capacity(&vector));
+
     reserve(&vector, 115);
     printf("%d %d\n", size(&vector), capacity(&vector));
+    printf("-------\n");
+
     empty(&vector);
-    pushBack(&vector, 10); printf("%d\n-----\n", vector.array[0]);
+
+    pushBack(&vector, 10);
     pushBack(&vector, 11);
     pushBack(&vector, 12);
     pushBack(&vector, 13);
     pushBack(&vector, 14);
-
     insert(&vector, 4, 2137);
-
-    for(int i = 0; i < vector.amountOfElements; i++)
-        printf("%d\n", vector.array[i]);
-
+    printVector(&vector);
     printf("-------\n");
 
     reverse(&vector);
-
-    for(int i = 0; i < vector.amountOfElements; i++)
-        printf("%d\n", vector.array[i]);
-
+    printVector(&vector);
     printf("-------\n");
 
     free(vector.array);

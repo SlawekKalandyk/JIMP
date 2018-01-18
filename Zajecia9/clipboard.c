@@ -111,6 +111,7 @@ void initialise(void)
             safe[i].previousChunk = &safe[i - 1];
         else
             safe[i].previousChunk = NULL;
+            
         if(i != chunkCount - 1)
             safe[i].nextChunk = &safe[i + 1];
         else
