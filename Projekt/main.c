@@ -15,7 +15,7 @@ int main(void)
             "Działania na jednej macierzy:\n"
             "1. Liczenie wyznacznika\n"
             "2. Transpozycja\n"
-            "3. Rozkład LU\n"
+            "3. \n"
             "4. Odwracanie\n"
             "Działania na dwóch macierzach:\n"
             "5. Dodawanie\n"
@@ -31,6 +31,11 @@ int main(void)
         switch(choice)
         {
             case 1:
+                printf("Wybrałeś liczenie wyznacznika\n");
+                printf("Wprowadź macierz:\n");
+                scanf("%s", data1);
+                matrixCreation(data1, &matrix1);
+                determinant(matrix1);
             break;
 
             case 2:
@@ -42,11 +47,7 @@ int main(void)
             break;
 
             case 3:
-                printf("Wybrałeś rozkład LU\n");
-                printf("Wprowadź macierz:\n");
-                scanf("%s", data1);
-                matrixCreation(data1, &matrix1);
-                LUdecomposition(&matrix1);
+
             break;
 
             case 5:

@@ -36,10 +36,10 @@ void matrixSize(char *rawData, Matrix *matrix)
 
 void memoryAllocation(Matrix *matrix)
 {
-    matrix->array = (int**)malloc(matrix->rows * sizeof(int*));
+    matrix->array = (double**)malloc(matrix->rows * sizeof(double*));
 
     for(int i = 0; i < matrix->rows; i++)
-        matrix->array[i] = (int*)malloc(matrix->columns * sizeof(int));
+        matrix->array[i] = (double*)malloc(matrix->columns * sizeof(double));
 }
 
 int dataFormatting(char *rawData, Matrix *matrix)
@@ -89,11 +89,48 @@ void matrixCreation(char *rawData, Matrix *matrix)
     dataFormatting(rawData, matrix);
 }
 
+double determinant(Matrix matrix)
+{   
+    double dataHolder = 0;
+    double determinant = 1;
+    int detSign = 1;
+
+    for(int i = 0; i < matrix.columns - 1; i++)
+    {
+        for(int j = 1 + i; j < matrix.rows; j++)
+        {
+            dataHolder = matrix.array[j][i];
+            for(int n = 0; n < matrix.columns; n++)
+            {
+                printf("%lf - %lf * %lf / %lf\n", matrix.array[j][n], dataHolder, matrix.array[i][n], matrix.array[i][i]);
+                matrix.array[j][n] -= dataHolder * matrix.array[i][n] / matrix.array[i][i];
+            }printf("break---\n");
+        }
+    }printf("------------\n");
+
+    for(int j = 0; j < matrix.rows; j++)
+    {
+        for(int i = 0; i < matrix.columns; i++)
+        {
+            printf("%lf\n", matrix.array[j][i]);
+        }printf("------------\n");
+    }
+
+    for(int i = 0; i < matrix.columns; i++)
+        determinant *= matrix.array[i][i];
+
+    if(determinant == -0)
+        determinant = 0;
+
+    printf("det: %lf\n", determinant);
+    return detSign * determinant;
+}
+
 void transposition(Matrix *matrix)
 {
     int a = 0;
 
-    int tab[matrix->rows][matrix->columns];
+    double tab[matrix->rows][matrix->columns];
 
     for(int i = 0; i < matrix->rows; i++)
     {
@@ -115,7 +152,7 @@ void transposition(Matrix *matrix)
         for(int j = 0; j < matrix->columns; j++)
         {
             matrix->array[i][j] = tab[j][i];
-            printf("%d ", matrix->array[i][j]);
+            printf("%lf ", matrix->array[i][j]);
         }
 
         printf("\n");
@@ -130,7 +167,7 @@ void addition(Matrix *matrix1, Matrix *matrix2)
         {
             for(int j = 0; j < matrix2->columns; j++)
             {
-                printf("%d ", matrix1->array[i][j] + matrix2->array[i][j]);
+                printf("%lf ", matrix1->array[i][j] + matrix2->array[i][j]);
             }
 
             printf("\n");
@@ -148,7 +185,7 @@ void subtraction(Matrix *matrix1, Matrix *matrix2)
         {
             for(int j = 0; j < matrix2->columns; j++)
             {
-                printf("%d ", matrix1->array[i][j] - matrix2->array[i][j]);
+                printf("%lf ", matrix1->array[i][j] - matrix2->array[i][j]);
             }
 
             printf("\n");
@@ -160,7 +197,7 @@ void subtraction(Matrix *matrix1, Matrix *matrix2)
 
 void multiplication(Matrix *matrix1, Matrix *matrix2)
 {
-    int result = 0;
+    double result = 0;
 
     if(matrix1->columns == matrix2->rows)
     {
@@ -171,7 +208,7 @@ void multiplication(Matrix *matrix1, Matrix *matrix2)
                 for(int n = 0; n < matrix1->columns; n++)
                     result += matrix1->array[i][n] * matrix2->array[n][j];
 
-                printf("%d ", result);
+                printf("%lf ", result);
                 result = 0;
             }
 
@@ -180,9 +217,4 @@ void multiplication(Matrix *matrix1, Matrix *matrix2)
     }
     else
         printf("Ilość kolumn pierwszej macierzy i wierszy drugiej macierzy nie są sobie równe!\n");
-}
-
-void LUdecomposition(Matrix *matrix)
-{
-
 }
