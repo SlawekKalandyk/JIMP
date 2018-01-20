@@ -56,20 +56,20 @@ int dataFormatting(char *rawData, Matrix *matrix)
 
         if(c == ',')
         {
-            matrix->array[rowCounter][columnCounter] = atoi(numberHolder);
+            matrix->array[rowCounter][columnCounter] = atof(numberHolder);
             memset(numberHolder, 0, charArraySize);
             charCounter = 0;
             columnCounter++;
         }
         else if(c == ';' || c == ']')
         {
-            matrix->array[rowCounter][columnCounter] = atoi(numberHolder);
+            matrix->array[rowCounter][columnCounter] = atof(numberHolder);
             memset(numberHolder, 0, charArraySize);
             charCounter = 0;
             columnCounter = 0;
             rowCounter++;
         }
-        else if((c >= 48 && c <= 57) || c == 45)
+        else if((c >= 48 && c <= 57) || c == 45 || c == 46)
         {
             numberHolder[charCounter] = c;
             charCounter++;
@@ -92,14 +92,33 @@ void matrixCreation(char *rawData, Matrix *matrix)
 double determinant(Matrix matrix)
 {   
     double dataHolder = 0;
+    double swapper = 0;
     double determinant = 1;
+    int counter = 0;
     int detSign = 1;
 
     for(int i = 0; i < matrix.columns - 1; i++)
     {
+        while(matrix.array[i][i] == 0)
+        {
+            counter++;
+
+            for(int n = 0; n < matrix.columns; n++)
+            {
+                swapper = matrix.array[i][n];
+                matrix.array[i][n] = matrix.array[i + counter][n];
+                matrix.array[i + counter][n] = swapper;
+            }
+
+            detSign *= -1;
+        }
+
+        counter = 0;
+
         for(int j = 1 + i; j < matrix.rows; j++)
         {
             dataHolder = matrix.array[j][i];
+
             for(int n = 0; n < matrix.columns; n++)
             {
                 printf("%lf - %lf * %lf / %lf\n", matrix.array[j][n], dataHolder, matrix.array[i][n], matrix.array[i][i]);
@@ -122,7 +141,7 @@ double determinant(Matrix matrix)
     if(determinant == -0)
         determinant = 0;
 
-    printf("det: %lf\n", determinant);
+    printf("det: %lf\n", detSign * determinant);
     return detSign * determinant;
 }
 
