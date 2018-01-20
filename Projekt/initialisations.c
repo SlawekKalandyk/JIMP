@@ -5,6 +5,37 @@
 
 #define charArraySize 200
 
+void printMatrix(Matrix matrix)
+{
+    for(int i = 0; i < matrix.rows; i++)
+    {
+        for(int j = 0; j < matrix.columns; j++)
+        {
+            printf("%lf ", matrix.array[i][j]);
+        }
+
+        printf("\n");
+    }
+}
+
+void swapDouble(double *a, double *b)
+{
+    double c = 0;
+
+    c = *a;
+    *a = *b;
+    *b = c;
+}
+
+void swapInt(int *a, int *b)
+{
+    int c = 0;
+
+    c = *a;
+    *a = *b;
+    *b = c;
+}
+
 void initialisation(Matrix *matrix)
 {
     matrix->rows = 0;
@@ -92,7 +123,6 @@ void matrixCreation(char *rawData, Matrix *matrix)
 double determinant(Matrix matrix)
 {   
     double dataHolder = 0;
-    double swapper = 0;
     double determinant = 1;
     int counter = 0;
     int detSign = 1;
@@ -101,14 +131,13 @@ double determinant(Matrix matrix)
     {
         while(matrix.array[i][i] == 0)
         {
+            if(counter == matrix.rows - i - 1)
+                return 0;
+
             counter++;
 
             for(int n = 0; n < matrix.columns; n++)
-            {
-                swapper = matrix.array[i][n];
-                matrix.array[i][n] = matrix.array[i + counter][n];
-                matrix.array[i + counter][n] = swapper;
-            }
+                swapDouble(&matrix.array[i][n], &matrix.array[i + counter][n]);
 
             detSign *= -1;
         }
@@ -121,12 +150,12 @@ double determinant(Matrix matrix)
 
             for(int n = 0; n < matrix.columns; n++)
             {
-                printf("%lf - %lf * %lf / %lf\n", matrix.array[j][n], dataHolder, matrix.array[i][n], matrix.array[i][i]);
+                //printf("%lf - %lf * %lf / %lf\n", matrix.array[j][n], dataHolder, matrix.array[i][n], matrix.array[i][i]);
                 matrix.array[j][n] -= dataHolder * matrix.array[i][n] / matrix.array[i][i];
-            }printf("break---\n");
+            }//printf("break---\n");
         }
-    }printf("------------\n");
-
+    }//printf("------------\n");
+/*
     for(int j = 0; j < matrix.rows; j++)
     {
         for(int i = 0; i < matrix.columns; i++)
@@ -134,21 +163,18 @@ double determinant(Matrix matrix)
             printf("%lf\n", matrix.array[j][i]);
         }printf("------------\n");
     }
-
+*/
     for(int i = 0; i < matrix.columns; i++)
         determinant *= matrix.array[i][i];
 
     if(determinant == -0)
         determinant = 0;
 
-    printf("det: %lf\n", detSign * determinant);
     return detSign * determinant;
 }
 
 void transposition(Matrix *matrix)
 {
-    int a = 0;
-
     double tab[matrix->rows][matrix->columns];
 
     for(int i = 0; i < matrix->rows; i++)
@@ -160,22 +186,27 @@ void transposition(Matrix *matrix)
     }
 
     free(matrix->array);
-    a = matrix->rows;
-    matrix->rows = matrix->columns;
-    matrix->columns = a;
+    swapInt(&matrix->rows, &matrix->columns);
 
     memoryAllocation(matrix);
 
     for(int i = 0; i < matrix->rows; i++)
     {
         for(int j = 0; j < matrix->columns; j++)
-        {
             matrix->array[i][j] = tab[j][i];
-            printf("%lf ", matrix->array[i][j]);
-        }
-
-        printf("\n");
     }
+}
+
+void inversion(Matrix *matrix)
+{
+    double det = determinant(*matrix);
+
+    if(det)
+    {
+        
+    }
+    else
+        printf("Nie można odwrócić macierzy o wyznaczniku równym 0\n");
 }
 
 void addition(Matrix *matrix1, Matrix *matrix2)

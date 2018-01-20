@@ -35,7 +35,11 @@ int main(void)
                 printf("Wprowadź macierz:\n");
                 scanf("%s", data1);
                 matrixCreation(data1, &matrix1);
-                determinant(matrix1);
+
+                if(matrix1.columns == matrix1.rows)
+                    printf("det: %lf\n", determinant(matrix1));
+                else
+                    printf("Podana macierz nie jest macierzą kwadratową\n");
             break;
 
             case 2:
@@ -44,10 +48,18 @@ int main(void)
                 scanf("%s", data1);
                 matrixCreation(data1, &matrix1);
                 transposition(&matrix1);
+                printMatrix(matrix1);
             break;
 
             case 3:
 
+            break;
+
+            case 4:
+                printf("Wybrałeś odwracanie macierzy\n");
+                printf("Wprowadź macierz:\n");
+                scanf("%s", data1);
+                matrixCreation(data1, &matrix1);
             break;
 
             case 5:
